@@ -29,10 +29,10 @@ def wrangle_zillow():
 
 
 #def missing_values(df): [working on this one....]
-        """
+    """
         A function that takes in a df and returns a new df with columns that 
         count numbers of nulls and the %% of those nulls
-        """
+    """
     #creating a column that counts all the nulls
        # df['num_rows_missing']= df(axis=1)
     #creating a column that finds what % the nulls are based on dataset count
@@ -44,7 +44,8 @@ def remove_columns(df, cols_to_remove):
     """
     A function that takes in a list of columns to remove
     Use this by writing 'cols_to_remove = [columns you want gone]' in notebook
-    then put df = remove_columns(df, cols_to_remove)"""
+    then put df = remove_columns(df, cols_to_remove)
+    """
     #cols_to_remove = ['heatingorsystemtypeid','parcelid','storytypeid','typeconstructiontypeid','airconditioningtypeid','propertylandusetypeid','architecturalstyletypeid','id','buildingclasstypeid','buildingqualitytypeid','decktypeid','pooltypeid10','pooltypeid2','pooltypeid7','taxamount','taxdelinquencyflag','taxdelinquencyyear','id']
 
     df = df.drop(columns=cols_to_remove)
@@ -61,5 +62,25 @@ def handle_missing_values(df, prop_required_column = .6, prop_required_row = .75
     df.dropna(axis=0, thresh=threshold, inplace=True)
     return df
 
+def change_types(df):
+    #cols_to_change = ['bedroomcnt','calculatedfinishedsquarefeet','finishedsquarefeet12','fips','fullbathcnt','lotsizesquarefeet','rawcensustractandblock','regionidcity','regionidcounty','regionidzip','unitcnt','yearbuilt','structuretaxvaluedollarcnt','taxvaluedollarcnt','assessmentyear','landtaxvaluedollarcnt','censustractandblock']
+    df['bedroomcnt'] = df['bedroomcnt'].astype('int')
+    df['calculatedfinishedsquarefeet'] = df['calculatedfinishedsquarefeet'].astype('int')
+    df['finishedsquarefeet12'] = df['finishedsquarefeet12'].astype('int')
+    df['fips'] = df['fips'].astype('int')
+    df['fullbathcnt'] = df['fullbathcnt'].astype('int')
+    df['lotsizesquarefeet'] = df['lotsizesquarefeet'].astype('int')
+    df['rawcensustractandblock'] = df['rawcensustractandblock'].astype('int')
+    df['regionidcity'] = df['regionidcity'].astype('int')
+    df['regionidzip'] = df['regionidzip'].astype('int')
+    df['unitcnt'] = df['unitcnt'].astype('int')
+    df['yearbuilt'] = df['yearbuilt'].astype('int')
+    df['structuretaxvaluedollarcnt'] = df['structuretaxvaluedollarcnt'].astype('int')
+    df['taxvaluedollarcnt'] = df['taxvaluedollarcnt'].astype('int')
+    df['assessmentyear'] = df['assessmentyear'].astype('int')
+    df['censustractandblock'] = df['censustractandblock'].astype('int')
+    df['landtaxvaluedollarcnt'] = df['landtaxvaluedollarcnt'].astype('int')
+
+    return df
 
 
