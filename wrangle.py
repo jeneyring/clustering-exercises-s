@@ -5,6 +5,7 @@ acquire & prepare for the cluster zillow exercises and project
 """
 
 import pandas as pd
+import numpy as np
 from env import get_db_url
 
 def wrangle_zillow():
@@ -25,3 +26,40 @@ def wrangle_zillow():
         """
 
     return pd.read_sql(sql, get_db_url("zillow"))
+
+
+#def missing_values(df): [working on this one....]
+        """
+        A function that takes in a df and returns a new df with columns that 
+        count numbers of nulls and the %% of those nulls
+        """
+    #creating a column that counts all the nulls
+       # df['num_rows_missing']= df(axis=1)
+    #creating a column that finds what % the nulls are based on dataset count
+        #df['pct_rows_missing']= round(df.count(axis=1)* 100 / len(df))
+    #return df
+
+
+def remove_columns(df, cols_to_remove): 
+    """
+    A function that takes in a list of columns to remove
+    Use this by writing 'cols_to_remove = [columns you want gone]' in notebook
+    then put df = remove_columns(df, cols_to_remove)"""
+    #cols_to_remove = ['heatingorsystemtypeid','parcelid','storytypeid','typeconstructiontypeid','airconditioningtypeid','propertylandusetypeid','architecturalstyletypeid','id','buildingclasstypeid','buildingqualitytypeid','decktypeid','pooltypeid10','pooltypeid2','pooltypeid7','taxamount','taxdelinquencyflag','taxdelinquencyyear','id']
+
+    df = df.drop(columns=cols_to_remove)
+    return df
+
+"""
+A funtion that takes in a df and returns the df where for 60% of columns that do not have
+nulls and returns rows where 75% of them do not have nulls
+"""
+def handle_missing_values(df, prop_required_column = .6, prop_required_row = .75):
+    threshold = int(round(prop_required_column*len(df.index),0))
+    df.dropna(axis=1, thresh=threshold, inplace=True)
+    threshold = int(round(prop_required_row*len(df.columns),0))
+    df.dropna(axis=0, thresh=threshold, inplace=True)
+    return df
+
+
+
