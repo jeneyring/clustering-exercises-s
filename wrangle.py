@@ -28,6 +28,28 @@ def wrangle_zillow():
     return pd.read_sql(sql, get_db_url("zillow"))
 
 
+def get_iris_data():
+    """
+    This function calls in the Iris dataset from MySQL
+    """
+    sql = """SELECT * 
+    from species 
+    join measurements using (species_id);
+    
+    """
+    return pd.read_sql(sql, get_db_url("iris_db"))
+
+
+def get_mall_db():
+    """
+    This function calls in the Mall customer dataset from MySQL
+    """
+    sql = """SELECT *
+    from customers;
+    
+    """
+    return pd.read_sql(sql, get_db_url("mall_customers"))
+
 #def missing_values(df): [working on this one....]
     """
         A function that takes in a df and returns a new df with columns that 
